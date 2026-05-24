@@ -64,10 +64,3 @@ The project was developed as part of the *Database Systems and Information Syste
   <img src="docs/schema-ristrutturato.jpg" width="1000">
 </p>
 
----
-
-## Relational Schema
-
-<p align="center">
-  <img src="docs/schema-relazionale.jpg" width="1000">
-</p>
