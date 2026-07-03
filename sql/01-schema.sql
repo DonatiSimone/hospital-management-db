@@ -83,6 +83,18 @@ CREATE TABLE Visita_tipo (
     durata_minuti INT CHECK (durata_minuti > 0) NOT NULL
 );
 
+CREATE TABLE Utente (
+    utente_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    ruolo VARCHAR(50) NOT NULL,
+    medico_id INT,
+    attivo BOOLEAN DEFAULT TRUE NOT NULL,
+    FOREIGN KEY (medico_id)
+        REFERENCES Medico(medico_id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+);
+
 CREATE TABLE Prenotazione (
     prenotazione_id SERIAL PRIMARY KEY,
     paziente_id INT NOT NULL,
@@ -103,7 +115,7 @@ CREATE TABLE Prenotazione (
     FOREIGN KEY (visita_tipo_id)
         REFERENCES Visita_tipo(codice_prestazione)
         ON DELETE RESTRICT
-        ON UPDATE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (utente_id)
         REFERENCES Utente(utente_id)
         ON DELETE SET NULL
@@ -231,18 +243,6 @@ CREATE TABLE Consenso (
     FOREIGN KEY (paziente_id)
         REFERENCES Paziente(paziente_id)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
-);
-
-CREATE TABLE Utente (
-    utente_id SERIAL PRIMARY KEY,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    ruolo VARCHAR(50) NOT NULL,
-    medico_id INT,
-    attivo BOOLEAN DEFAULT TRUE NOT NULL,
-    FOREIGN KEY (medico_id)
-        REFERENCES Medico(medico_id)
-        ON DELETE SET NULL
         ON UPDATE CASCADE
 );
 
